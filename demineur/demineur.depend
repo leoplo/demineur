@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1507744476 source:/home/romain/Bureau/Cour/projet/demineur/main.c
+	<stdio.h>
+	<stdlib.h>
+	"menu.h"
+	"menu.c"
+
+1507744373 /home/romain/Bureau/Cour/projet/demineur/menu.h
+
+1507744658 /home/romain/Bureau/Cour/projet/demineur/menu.c
+	<stdio.h>
+	<stdlib.h>
+	"menu.h"
+
