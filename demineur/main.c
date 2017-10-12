@@ -1,12 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "menu.h"
 #include "menu.c"
+#include "grille.c"
+
+
+
+
 
 
 int main()
 {
-    menu();
+    int i;
+    i=menu();
+    if(i==1) AfficherGrille();
+
     return 0;
 }
 
