@@ -25,7 +25,7 @@ void afficherGrille(int taille, char** partie)
     char* ligne;
     ligne = malloc((5 + 4*(taille+1)) * sizeof(char));
 
-    printf("\n\n");
+    printf("\n");
 
     strcpy(ligne, "       ");
     for(i=0;i<taille;i++)
@@ -46,4 +46,6 @@ void afficherGrille(int taille, char** partie)
         printf("%s\n", ligneSeparatrice(taille));
     }
     printf("\n");
+
+    free(ligne);
 }

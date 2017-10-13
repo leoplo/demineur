@@ -24,11 +24,11 @@ int menu()
     switch(affichageMenu())
     {
                      case 1:
-                          printf("Vous avez choisi de jouer!");
+                          printf("Vous avez choisi de jouer!\n");
                           i=1;
                           break;
                      case 2:
-                          printf("Vous avez choisi de reprendre!");
+                          printf("Vous avez choisi de reprendre!\n");
                           i=2;
                           break;
                      case 3:
@@ -36,11 +36,11 @@ int menu()
                           i=3;
                           break;
                      case 4:
-                          printf("Vous n'auriez pas du choisir ca...");
+                          printf("Vous n'auriez pas du choisir ca...\n");
                           i=4;
                           break;
                      default:
-                             printf("Vous ne ferez rien du tout!");
+                             printf("Vous ne ferez rien du tout!\n");
                              break;
     }
 
