@@ -24,11 +24,11 @@ int menu()
     switch(affichageMenu())
     {
                      case 1:
-                          printf("Vous avez choisis de jouer!");
+                          printf("Vous avez choisi de jouer!");
                           i=1;
                           break;
                      case 2:
-                          printf("Vous avez choisis de reprendre!");
+                          printf("Vous avez choisi de reprendre!");
                           i=2;
                           break;
                      case 3:

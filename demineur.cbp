@@ -40,11 +40,12 @@
 		</Unit>
 		<Unit filename="menu.c">
 			<Option compilerVar="CC" />
-			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="menu.h">
-			<Option target="&lt;{~None~}&gt;" />
+		<Unit filename="menu.h" />
+		<Unit filename="partie.c">
+			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="partie.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

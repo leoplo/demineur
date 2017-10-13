@@ -1,32 +1,4 @@
 # depslib dependency file v1.0
-1507746149 source:/home/romain/Bureau/Cour/projet/demineur/main.c
-	<stdio.h>
-	<stdlib.h>
-	"menu.c"
-	"grille.c"
-
-1507744373 /home/romain/Bureau/Cour/projet/demineur/menu.h
-
-1507745577 /home/romain/Bureau/Cour/projet/demineur/menu.c
-	<stdio.h>
-	<stdlib.h>
-	"menu.h"
-
-1507746283 /home/romain/Bureau/Cour/projet/demineur/grille.c
-	<stdio.h>
-	<stdlib.h>
-	"grille.h"
-
-1507746149 /home/romain/Bureau/Cour/projet/demineur/grille.h
-
-1507906977 source:/home/cid/Documents/ING1/Projet c/demineur/grille.c
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	"grille.h"
-
-1507905550 /home/cid/Documents/ING1/Projet c/demineur/grille.h
-
 1507905595 source:/home/cid/Documents/ING1/Projet c/demineur/main.c
 	"menu.h"
 	"grille.h"
@@ -34,7 +6,19 @@
 
 1507903979 /home/cid/Documents/ING1/Projet c/demineur/menu.h
 
-1507905130 /home/cid/Documents/ING1/Projet c/demineur/partie.h
+1507905550 /home/cid/Documents/ING1/Projet c/demineur/grille.h
+
+1507908369 /home/cid/Documents/ING1/Projet c/demineur/partie.h
+
+1507906977 source:/home/cid/Documents/ING1/Projet c/demineur/grille.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"grille.h"
+
+1507909382 source:/home/cid/Documents/ING1/Projet c/demineur/menu.c
+	<stdio.h>
+	"menu.h"
 
 1507906055 source:/home/cid/Documents/ING1/Projet c/demineur/partie.c
 	<stdlib.h>
