@@ -3,5 +3,6 @@
 
 char* ligneSeparatrice(int);
 void afficherGrille(int, char**);
+void RemplirGrille();
 
 #endif // GRILLE_H_INCLUDED
