@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "mines.h"
 
-int coordonneesExisteDeja(int x, int y, int tableau[10][10]) //renvoie 1 si le couple x,y existe déjà dans le tableau
+int coordonneesExisteDeja(int x, int y, int ** tableau) //renvoie 1 si le couple x,y existe déjà dans le tableau
 {
     if(tableau[x][y] == 1) // S'il y a une mine alors le couple x,y existe
     {
@@ -12,7 +12,7 @@ int coordonneesExisteDeja(int x, int y, int tableau[10][10]) //renvoie 1 si le c
     }
 }
 
-int** GenererMines(int taille)//renvoie un tableau de mines (1 : il y a une bombe / 0 : il n'y a rien)
+int** genererMines(int taille)//renvoie un tableau de mines (1 : il y a une bombe / 0 : il n'y a rien)
 {
     int** mines;
     int nbBombes = 15;
@@ -44,5 +44,20 @@ int** GenererMines(int taille)//renvoie un tableau de mines (1 : il y a une bomb
         nbBombes--;
     }
     return mines;
+}
+
+void afficherMines(int** mines, int taille)
+{
+    int i,j;
+    for(i=0;i<taille;i++)
+    {
+        for(j=0;j<taille;j++)
+        {
+            if(mines[i][j] == 1)//S'il y a une bombe
+            {
+                printf("\nBombe[%d][%d]", i, j);
+            }
+        }
+    }
 }
 
