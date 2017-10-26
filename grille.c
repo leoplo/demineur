@@ -1,25 +1,36 @@
-<<<<<<< Updated upstream
+#include "grille.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "grille.h"
 #include "mines.h"
-
-ElementGrille** remplirGrille()
-=======
-#include "grille.h"
 
 const int MARGE = 5;
 
 const int TAILLE_CASE = 3;
 
-/*void RemplirGrille()
->>>>>>> Stashed changes
+ElementGrille** nouvelleGrille(int taille)
 {
-    int taille = 10;
-    int i =0;
-    int j =0;
+    ElementGrille** grille = remplirGrille(taille);
+    int **mines = genererMines(taille), i;
+    //afficherMines(mines, 10);
+
+    remplirGrilleAvecMine(grille, mines, taille);
+
+    for(i=0;i<taille;i++)
+    {
+        free(mines[i]);
+    }
+    free(mines);
+
+    return grille;
+}
+
+ElementGrille** remplirGrille(int taille)
+{
+    int i, j;
     ElementGrille** grille = malloc(taille * sizeof(ElementGrille*));
+
     for(i=0;i<taille;i++)
     {
         grille[i] = malloc(taille * sizeof(ElementGrille));
@@ -61,17 +72,12 @@ void lireGrille(ElementGrille** grille, int taille)
             printf("\nElement [%d,%d] : Drapeau : %d, Mine : %d, CaseRevelee : %d", i,j,e.presenceDrapeau,e.presenceMine,e.caseRevelee);
         }
     }
-<<<<<<< Updated upstream
 }
-=======
-    fclose(file);
-}*/
 
 // initialise toutes les cases d'un tableau avec le caractère c
 void remplirTab(char* tab, int taille, char c)
 {
     int i;
->>>>>>> Stashed changes
 
     for(i=0;i<taille;i++)
     {
@@ -101,8 +107,24 @@ void definirLigneSeparatrice(char* ligne, int taille)
     strcat(ligne, "+");
 }
 
+char afficherCase(ElementGrille e)
+{
+    if(e.presenceDrapeau)
+        return 'd';
+
+    if(e.presenceMine)
+        return 'x';
+
+    /*
+    A FAIRE
+    if(e.caseRevelee)
+    */
+
+    return ' ';
+}
+
 //imprime sur la sortie standard l'état actuel de la partie
-void afficherGrille(int taille, char** partie)
+void afficherGrille(ElementGrille** grille, int taille)
 {
     int i, j;
     char *ligne, *ligneSeparatrice, marge[MARGE];
@@ -129,7 +151,7 @@ void afficherGrille(int taille, char** partie)
         sprintf(ligne, "  %d  ", i+1);
         for(j=0;j<taille;j++)
         {
-            sprintf(ligne+MARGE+(TAILLE_CASE+1)*j, "| %c ", partie[i][j]);
+            sprintf(ligne+MARGE+(TAILLE_CASE+1)*j, "| %c ", afficherCase(grille[i][j]));
         }
         printf("%s|\n%s\n", ligne, ligneSeparatrice);
     }

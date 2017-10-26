@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "mines.h"
 
 int coordonneesExisteDeja(int x, int y, int ** tableau) //renvoie 1 si le couple x,y existe déjà dans le tableau
@@ -44,7 +45,6 @@ int** genererMines(int taille)//renvoie un tableau de mines (1 : il y a une bomb
         nbBombes--;
     }
     return mines;
-<<<<<<< Updated upstream
 }
 
 void afficherMines(int** mines, int taille)
@@ -61,7 +61,3 @@ void afficherMines(int** mines, int taille)
         }
     }
 }
-
-=======
-}
->>>>>>> Stashed changes
