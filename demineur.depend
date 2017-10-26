@@ -1,26 +1,35 @@
 # depslib dependency file v1.0
-1507905595 source:/home/cid/Documents/ING1/Projet c/demineur/main.c
+1509051721 source:/home/cid/Documents/ING1/Projet c/demineur/main.c
 	"menu.h"
 	"grille.h"
 	"partie.h"
 
 1507903979 /home/cid/Documents/ING1/Projet c/demineur/menu.h
 
-1507905550 /home/cid/Documents/ING1/Projet c/demineur/grille.h
-
-1507908369 /home/cid/Documents/ING1/Projet c/demineur/partie.h
-
-1507906977 source:/home/cid/Documents/ING1/Projet c/demineur/grille.c
+1509052135 /home/cid/Documents/ING1/Projet c/demineur/grille.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	"elementGrille.h"
+
+1507908369 /home/cid/Documents/ING1/Projet c/demineur/partie.h
+
+1509051699 source:/home/cid/Documents/ING1/Projet c/demineur/grille.c
 	"grille.h"
 
-1507909382 source:/home/cid/Documents/ING1/Projet c/demineur/menu.c
+1507910264 source:/home/cid/Documents/ING1/Projet c/demineur/menu.c
 	<stdio.h>
 	"menu.h"
 
 1507906055 source:/home/cid/Documents/ING1/Projet c/demineur/partie.c
 	<stdlib.h>
 	"partie.h"
+
+1508095674 /home/cid/Documents/ING1/Projet c/demineur/elementGrille.h
+
+1508835485 source:/home/cid/Documents/ING1/Projet c/demineur/mines.c
+	<stdlib.h>
+	"mines.h"
+
+1508095674 /home/cid/Documents/ING1/Projet c/demineur/mines.h
 

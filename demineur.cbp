@@ -31,6 +31,9 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename=".gitignore" />
+		<Unit filename="Makefile" />
+		<Unit filename="elementGrille.h" />
 		<Unit filename="grille.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -42,6 +45,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="menu.h" />
+		<Unit filename="mines.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="mines.h" />
 		<Unit filename="partie.c">
 			<Option compilerVar="CC" />
 		</Unit>

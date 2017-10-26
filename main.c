@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 #include <stdio.h>
 #include <stdlib.h>
 #include "menu.c"
@@ -10,6 +11,23 @@ int main()
 int i, taille=10;
 char** partie;
 i=menu();
+=======
+#include "menu.h"
+#include "grille.h"
+#include "partie.h"
+
+
+
+
+
+
+int main()
+{
+    int i, taille=10;
+    char** partie;
+
+    i=menu();
+>>>>>>> Stashed changes
     if(i==1)
     {
         partie = nouvellePartie(taille);
