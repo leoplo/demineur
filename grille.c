@@ -2,28 +2,56 @@
 #include <stdlib.h>
 #include <string.h>
 #include "grille.h"
-#include "elementGrille.h"
+#include "mines.h"
 
-void RemplirGrille()
+ElementGrille** remplirGrille()
 {
-    int taille =10;
-    ElementGrille grille[taille][taille];
+    int taille = 10;
     int i =0;
     int j =0;
-    FILE* file = fopen("grille.txt", "r+");
-    while(i<taille)
+    ElementGrille** grille = malloc(taille * sizeof(ElementGrille*));
+    for(i=0;i<taille;i++)
     {
-        while(j<taille)
+        grille[i] = malloc(taille * sizeof(ElementGrille));
+        for(j=0;j<taille;j++)
         {
-            fprintf(file, " {%d %d %d %d %d} ", i,j,0,0,0); //format : {x, y, presenceMine, presenceDrapeau, caseRévélée}
-            j++;
+            ElementGrille * e = malloc(sizeof(ElementGrille));
+            e->caseRevelee = 0;
+            e->presenceDrapeau =0;
+            e->presenceMine = 0;
+            grille[i][j] = *e;
         }
-        i++;
-        j=0;
     }
-    fclose(file);
+    return grille;
 }
 
+void remplirGrilleAvecMine(ElementGrille** grille,int** mines, int taille)
+{
+    int i,j;
+    for(i=0;i<taille;i++)
+    {
+        for(j=0;j<taille;j++)
+        {
+            if(mines[i][j] == 1)
+            {
+                grille[i][j].presenceMine = 1;
+            }
+        }
+    }
+}
+
+void lireGrille(ElementGrille** grille, int taille)
+{
+    int i,j;
+    for(i=0;i<taille;i++)
+    {
+        for(j=0;j<taille;j++)
+        {
+            ElementGrille e = grille[i][j];
+            printf("\nElement [%d,%d] : Drapeau : %d, Mine : %d, CaseRevelee : %d", i,j,e.presenceDrapeau,e.presenceMine,e.caseRevelee);
+        }
+    }
+}
 
 char* ligneSeparatrice(int taille)
 {
