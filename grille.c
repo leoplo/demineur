@@ -1,13 +1,13 @@
-#include "grille.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "grille.h"
 #include "mines.h"
 
 const int MARGE = 5;
 
 const int TAILLE_CASE = 3;
+
 
 ElementGrille** nouvelleGrille(int taille)
 {
@@ -28,15 +28,15 @@ ElementGrille** nouvelleGrille(int taille)
 
 ElementGrille** remplirGrille(int taille)
 {
-    int i, j;
+    int i =0;
+    int j =0;
     ElementGrille** grille = malloc(taille * sizeof(ElementGrille*));
-
     for(i=0;i<taille;i++)
     {
         grille[i] = malloc(taille * sizeof(ElementGrille));
         for(j=0;j<taille;j++)
         {
-            ElementGrille * e = malloc(sizeof(ElementGrille));
+            ElementGrille* e = malloc(sizeof(ElementGrille));
             e->caseRevelee = 0;
             e->presenceDrapeau =0;
             e->presenceMine = 0;
@@ -159,4 +159,9 @@ void afficherGrille(ElementGrille** grille, int taille)
 
     free(ligne);
     free(ligneSeparatrice);
+}
+
+int presenceMine(int x, int y, ElementGrille** grille)
+{
+    return grille[x][y].presenceMine;
 }
