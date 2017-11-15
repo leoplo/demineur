@@ -3,6 +3,8 @@
 
 int affichageMenu();
 int menu();
+int* choisirCase();
+int affichageInteractionJoueur();
 
 #endif // MENU_H_INCLUDED
 
