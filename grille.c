@@ -83,18 +83,19 @@ void remplirTab(char* tab, int taille, char c)
     {
         tab[i]=c;
     }
+    tab[i] = '\0';
 }
 
 //séparation horizontale entre les cases de la grille
 void definirLigneSeparatrice(char* ligne, int taille)
 {
     int i;
-    char marge[MARGE], separateurCase[TAILLE_CASE];
+    char marge[MARGE+1], separateurCase[TAILLE_CASE];
 
     remplirTab(marge, MARGE, ' ');
     remplirTab(separateurCase, TAILLE_CASE, '-');
 
-    strcat(ligne, marge);
+    strcpy(ligne, marge);
     strcat(ligne, "+");
     strcat(ligne, separateurCase);
 
@@ -109,14 +110,14 @@ void definirLigneSeparatrice(char* ligne, int taille)
 
 char afficherCase(ElementGrille e)
 {
+    if(e.caseRevelee)
+        return e.minesAdjacentes+48;
+
     if(e.presenceDrapeau)
         return 'd';
 
     if(e.presenceMine)
         return 'x';
-
-    if(e.caseRevelee)
-        return e.minesAdjacentes+48;
 
     return ' ';
 }
@@ -125,7 +126,7 @@ char afficherCase(ElementGrille e)
 void afficherGrille(ElementGrille** grille, int taille)
 {
     int i, j;
-    char *ligne, *ligneSeparatrice, marge[MARGE];
+    char *ligne, *ligneSeparatrice, marge[MARGE+1];
 
     remplirTab(marge, MARGE, ' ');
     ligne = malloc((MARGE + (TAILLE_CASE+1)*(taille+1)) * sizeof(char));
@@ -136,7 +137,7 @@ void afficherGrille(ElementGrille** grille, int taille)
 
     printf("\n");
 
-    strcat(ligne, marge);
+    strcpy(ligne, marge);
     strcat(ligne, "  ");
     for(i=0;i<taille;i++)
     {
@@ -149,7 +150,7 @@ void afficherGrille(ElementGrille** grille, int taille)
         sprintf(ligne, "  %d  ", i+1);
         for(j=0;j<taille;j++)
         {
-            sprintf(ligne+MARGE+(TAILLE_CASE+1)*j, "| %c ", afficherCase(grille[i][j]));
+            sprintf(ligne+MARGE+(TAILLE_CASE+1)*j, "| %c ", afficherCase(grille[j][i]));
         }
         printf("%s|\n%s\n", ligne, ligneSeparatrice);
     }
@@ -202,7 +203,7 @@ int existe(int x, int y, int taille){
 }
 
 void minesAdjacentes(ElementGrille** grille, int x, int y, int taille){
-    if(!existe(x, y, taille))
+    if(!existe(x, y, taille) || grille[x][y].caseRevelee)
         return;
 
     grille[x][y].caseRevelee = 1;

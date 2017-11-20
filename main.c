@@ -32,8 +32,10 @@ int main()
                     break;
             }
 
-            if(quitterJeu)
+            if(quitterJeu){
+                printf("Perdu\n");
                 break;
+            }
 
             afficherGrille(grille, taille);
             choix = affichageInteractionJoueur();
