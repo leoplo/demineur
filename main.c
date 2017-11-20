@@ -1,17 +1,18 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "menu.h"
 #include "grille.h"
 #include "mines.h"
 
 int main()
 {
-    int i, taille=9, choix, coordonnees[2], quitterJeu=0;
+    int i, taille=9, nbMines=15, choix, coordonnees[2], quitterJeu=0;
 
     i=menu();
 
     if(i==1)
     {
-        ElementGrille** grille = nouvelleGrille(taille);
+        ElementGrille** grille = nouvelleGrille(taille, nbMines);
         afficherGrille(grille, taille);
         choix = affichageInteractionJoueur(); //afficher les intéractions possibles avec le joueur
 

@@ -5,23 +5,13 @@
 #include "mines.h"
 
 const int MARGE = 5;
-
 const int TAILLE_CASE = 3;
 
 
-ElementGrille** nouvelleGrille(int taille)
+ElementGrille** nouvelleGrille(int taille, int nbMines)
 {
     ElementGrille** grille = remplirGrille(taille);
-    int **mines = genererMines(taille), i;
-    //afficherMines(mines, 10);
-
-    remplirGrilleAvecMine(grille, mines, taille);
-
-    for(i=0;i<taille;i++)
-    {
-        free(mines[i]);
-    }
-    free(mines);
+    genererMines(grille, taille, nbMines);
 
     return grille;
 }
@@ -44,34 +34,6 @@ ElementGrille** remplirGrille(int taille)
         }
     }
     return grille;
-}
-
-void remplirGrilleAvecMine(ElementGrille** grille,int** mines, int taille)
-{
-    int i,j;
-    for(i=0;i<taille;i++)
-    {
-        for(j=0;j<taille;j++)
-        {
-            if(mines[i][j] == 1)
-            {
-                grille[i][j].presenceMine = 1;
-            }
-        }
-    }
-}
-
-void lireGrille(ElementGrille** grille, int taille)
-{
-    int i,j;
-    for(i=0;i<taille;i++)
-    {
-        for(j=0;j<taille;j++)
-        {
-            ElementGrille e = grille[i][j];
-            printf("\nElement [%d,%d] : Drapeau : %d, Mine : %d, CaseRevelee : %d", i,j,e.presenceDrapeau,e.presenceMine,e.caseRevelee);
-        }
-    }
 }
 
 // initialise toutes les cases d'un tableau avec le caractère c
