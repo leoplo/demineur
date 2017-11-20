@@ -10,8 +10,7 @@ int affichageMenu()
      printf("---Menu---\n\n");
      printf("1.Jouer !\n");
      printf("2.Reprendre!\n");
-     printf("3.Vas y test\n");
-     printf("4.Et le je ne sais pas quoi mettre\n\n\n");
+     printf("3.Quitter\n");
      printf("\nVotre choix?\n\n");
 
      scanf("%d", &choixMenu);
@@ -21,85 +20,73 @@ int affichageMenu()
 
 int menu()
 {
-    int i;
-    switch(affichageMenu())
+    int choix = affichageMenu();
+    while(choix < 1 || choix > 3){
+        printf("Veuillez choisir parmi les options proposées\n");
+        choix = affichageMenu();
+    }
+
+    switch(choix)
     {
-                     case 1:
-                          printf("Vous avez choisis de jouer!");
-                          i=1;
-                          break;
-                     case 2:
-                          printf("Vous avez choisis de reprendre!");
-                          i=2;
-                          break;
-                     case 3:
-                          printf("BAAAAAMMMMM!");
-                          i=3;
-                          break;
-                     case 4:
-                          printf("Vous n'auriez pas du choisir ca...");
-                          i=4;
-                          break;
-                     default:
-                             printf("Vous ne ferez rien du tout!");
-                             break;
+        case 1:
+            printf("Vous avez choisi de jouer!\n");
+            break;
+
+        case 2:
+            printf("Vous avez choisi de reprendre!\n");
+            break;
+
+        case 3:
+            printf("Vous avez choisi de quitter\n");
+            break;
     }
 
 
-  return i;
+  return choix;
 }
 
 int affichageInteractionJoueur()
 {
     int choix;
-    int i;
     printf("--------Actions possibles---------\n\n");
-    printf("1.Choisir une case\n");
+    printf("1.Reveler une case\n");
     printf("2.Placer un drapeau\n");
     printf("3.Supprimer un drapeau\n");
-    printf("0.Quitter\n");
+    printf("4.Quitter\n");
     printf("\nVotre choix?\n\n");
 
     scanf("%d",&choix);
-    switch(choix)
-    {
-                     case 1:
-                        i=1;
-                        break;
-                     case 2:
-                        i=2;
-                        break;
-                     case 3:
-                        i=3;
-                        break;
-                    case 0:
-                        i=0;
-                        break;
+    while(choix < 1 || choix > 4){
+        printf("Veuillez choisir parmi les options proposées\n");
+        scanf("%d",&choix);
     }
-    return i;
+
+    return choix;
 }
 
-int* choisirCase()
+void choisirCase(int* coordonnees, int taille)
 {
     int x,y;
-    int* tab = malloc(2*sizeof(int));
+
     printf("--------Choisir une case---------\n\n");
+
     printf("-->Entrez x : ");
     scanf("%d", &x);
+    while(x<1 || x>taille){
+        printf("Veuillez entrer une coordonnee existante\n");
+        printf("-->Entrez x : ");
+        scanf("%d", &x);
+    }
+
     printf("-->Entrez y : ");
     scanf("%d", &y);
-    tab[0] = x-1;
-    tab[1] = y-1;
-    return tab;
-}
+    while(y<1 || y>taille){
+        printf("Veuillez entrer une coordonnee existante\n");
+        printf("-->Entrez y : ");
+        scanf("%d", &y);
+    }
 
-void placerDrapeau()
-{
-
-}
-
-void enleverDrapeau()
-{
-
+    coordonnees[0] = x-1;
+    coordonnees[1] = y-1;
 }
 

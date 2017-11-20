@@ -115,10 +115,8 @@ char afficherCase(ElementGrille e)
     if(e.presenceMine)
         return 'x';
 
-    /*
-    A FAIRE
     if(e.caseRevelee)
-    */
+        return e.minesAdjacentes+48;
 
     return ' ';
 }
@@ -161,7 +159,72 @@ void afficherGrille(ElementGrille** grille, int taille)
     free(ligneSeparatrice);
 }
 
-int presenceMine(int x, int y, ElementGrille** grille)
+int presenceMine(int x, int y, ElementGrille** grille, int taille)
 {
+    if(x<0 || y<0 || x>taille-1 || y>taille-1)
+        return 0;
+
+    printf("presenceMine: %d\n", grille[x][y].presenceMine);
     return grille[x][y].presenceMine;
+}
+
+void placerDrapeau(ElementGrille** grille, int* coordonnes)
+{
+    grille[coordonnes[0]][coordonnes[1]].presenceDrapeau = 1;
+}
+
+void enleverDrapeau(ElementGrille** grille, int* coordonnes)
+{
+    grille[coordonnes[0]][coordonnes[1]].presenceDrapeau = 0;
+}
+
+//retourne 1 si la partie est perdue, 0 sinon
+int revelerCase(ElementGrille** grille, int* coordonnes, int taille){
+    if(grille[coordonnes[0]][coordonnes[1]].caseRevelee)
+        return 0;
+
+    if(grille[coordonnes[0]][coordonnes[1]].presenceDrapeau)
+        return 0;
+
+    if(grille[coordonnes[0]][coordonnes[1]].presenceMine)
+        return 1;
+
+    minesAdjacentes(grille, coordonnes[0], coordonnes[1], taille);
+
+    return 0;
+}
+
+int existe(int x, int y, int taille){
+    if(x<0 || y<0 || x>taille-1 || y>taille-1)
+        return 0;
+
+    return 1;
+}
+
+void minesAdjacentes(ElementGrille** grille, int x, int y, int taille){
+    if(!existe(x, y, taille))
+        return;
+
+    grille[x][y].caseRevelee = 1;
+    grille[x][y].minesAdjacentes =
+        presenceMine(x-1, y, grille, taille)
+        + presenceMine(x-1, y+1, grille, taille)
+        + presenceMine(x, y+1, grille, taille)
+        + presenceMine(x+1, y+1, grille, taille)
+        + presenceMine(x+1, y, grille, taille)
+        + presenceMine(x+1, y-1, grille, taille)
+        + presenceMine(x, y-1, grille, taille)
+        + presenceMine(x-1, y-1, grille, taille);
+    printf("mines: %d\n", grille[x][y].minesAdjacentes);
+
+    if(grille[x][y].minesAdjacentes == 0){
+        minesAdjacentes(grille, x-1, y, taille);
+        minesAdjacentes(grille, x-1, y+1, taille);
+        minesAdjacentes(grille, x, y+1, taille);
+        minesAdjacentes(grille, x+1, y+1, taille);
+        minesAdjacentes(grille, x+1, y, taille);
+        minesAdjacentes(grille, x+1, y-1, taille);
+        minesAdjacentes(grille, x, y-1, taille);
+        minesAdjacentes(grille, x-1, y-1, taille);
+    }
 }

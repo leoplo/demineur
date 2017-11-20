@@ -30,8 +30,8 @@ int** genererMines(int taille)//renvoie un tableau de mines (1 : il y a une bomb
     }
     while(nbBombes>0)
     {
-        nbAleaX = rand()%10; //coordonnée x aléatoire
-        nbAleaY = rand()%10; //coordonnée y aléatoire
+        nbAleaX = rand()%taille; //coordonnée x aléatoire
+        nbAleaY = rand()%taille; //coordonnée y aléatoire
 
         if(coordonneesExisteDeja(nbAleaX, nbAleaY, mines)) // Gestion des doublons
         {

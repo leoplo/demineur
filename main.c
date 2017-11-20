@@ -2,11 +2,10 @@
 #include "menu.h"
 #include "grille.h"
 #include "mines.h"
-#include "partie.h"
 
 int main()
 {
-    int i, taille=10;
+    int i, taille=9, choix, coordonnees[2], quitterJeu=0;
 
     i=menu();
 
@@ -14,23 +13,30 @@ int main()
     {
         ElementGrille** grille = nouvelleGrille(taille);
         afficherGrille(grille, taille);
-        int j = affichageInteractionJoueur(); //afficher les intéractions possibles avec le joueur
-        if(j == 1) //Choisir une case
-        {
-            int* tab = choisirCase();
-            if(presenceMine(tab[0], tab[1], grille))
-            {
-                printf("mine");
+        choix = affichageInteractionJoueur(); //afficher les intéractions possibles avec le joueur
+
+        while(choix!=4){
+            choisirCase(coordonnees, taille);
+
+            switch(choix){
+                case 1://Choisir une case
+                    quitterJeu = revelerCase(grille, coordonnees, taille);
+                    break;
+
+                case 2://Placer drapeau
+                    placerDrapeau(grille, coordonnees);
+                    break;
+
+                case 3://Enlever drapeau
+                    enleverDrapeau(grille, coordonnees);
+                    break;
             }
 
-        }
-        if(j == 2) //Placer drapeau
-        {
+            if(quitterJeu)
+                break;
 
-        }
-        if(j==3)//Enlever drapeau
-        {
-
+            afficherGrille(grille, taille);
+            choix = affichageInteractionJoueur();
         }
 
         for(i=0;i<taille;i++)

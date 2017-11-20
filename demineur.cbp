@@ -49,10 +49,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="mines.h" />
-		<Unit filename="partie.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="partie.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -g -Wall
-SRCS = main.c menu.c grille.c partie.c
+SRCS = main.c menu.c mines.c  grille.c
 OBJS = $(SRCS:.c=.o)
 MAIN = main
 

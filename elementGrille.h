@@ -5,6 +5,7 @@ struct elementGrille {
     int presenceMine; // 1 si true et 0 si false
     int presenceDrapeau; // 1 si true et 0 si false
     int caseRevelee; // 1 si true et 0 si false
+    int minesAdjacentes;
 };
 
 typedef struct elementGrille ElementGrille;

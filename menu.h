@@ -3,8 +3,8 @@
 
 int affichageMenu();
 int menu();
-int* choisirCase();
 int affichageInteractionJoueur();
+void choisirCase(int* coordonnees, int taille);
 
 #endif // MENU_H_INCLUDED
 
