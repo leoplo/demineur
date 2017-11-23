@@ -16,7 +16,7 @@ int main()
         afficherGrille(grille, taille);
         choix = affichageInteractionJoueur(); //afficher les intéractions possibles avec le joueur
 
-        while(choix!=4){
+        while(choix!=5 && choix!=4){
             choisirCase(coordonnees, taille);
 
             switch(choix){
@@ -25,7 +25,7 @@ int main()
                     break;
 
                 case 2://Placer drapeau
-                    placerDrapeau(grille, coordonnees);
+                    grille = placerDrapeau(grille, coordonnees);
                     break;
 
                 case 3://Enlever drapeau
@@ -40,6 +40,11 @@ int main()
 
             afficherGrille(grille, taille);
             choix = affichageInteractionJoueur();
+        }
+
+        if(choix == 4)//sauvegarde
+        {
+            sauvegardeGrille("save.txt", grille,taille);
         }
 
         for(i=0;i<taille;i++)

@@ -22,7 +22,7 @@ int menu()
 {
     int choix = affichageMenu();
     while(choix < 1 || choix > 3){
-        printf("Veuillez choisir parmi les options proposÃ©es\n");
+        printf("Veuillez choisir parmi les options proposées\n");
         choix = affichageMenu();
     }
 
@@ -52,12 +52,13 @@ int affichageInteractionJoueur()
     printf("1.Reveler une case\n");
     printf("2.Placer un drapeau\n");
     printf("3.Supprimer un drapeau\n");
-    printf("4.Quitter\n");
+    printf("4.Sauvegarder la partie actuelle\n");
+    printf("5.Quitter\n");
     printf("\nVotre choix?\n\n");
 
     scanf("%d",&choix);
-    while(choix < 1 || choix > 4){
-        printf("Veuillez choisir parmi les options proposÃ©es\n");
+    while(choix < 1 || choix > 5){
+        printf("Veuillez choisir parmi les options proposées\n");
         scanf("%d",&choix);
     }
 
@@ -89,4 +90,3 @@ void choisirCase(int* coordonnees, int taille)
     coordonnees[0] = x-1;
     coordonnees[1] = y-1;
 }
-
