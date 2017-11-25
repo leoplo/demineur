@@ -32,7 +32,7 @@ int menu()
 {
     int choix = affichageMenu();
     while(choix < JOUER || choix > QUITTER_MENU){
-        printf("Veuillez choisir parmi les options proposÃ©es\n");
+        printf("Veuillez choisir parmi les options proposees\n");
         choix = affichageMenu();
     }
 
@@ -58,7 +58,7 @@ int menu()
 int affichageInteractionJoueur()
 {
     printf("--------Actions possibles---------\n\n");
-    printf("1.Révéler une case\n");
+    printf("1.Reveler une case\n");
     printf("2.Placer un drapeau\n");
     printf("3.Supprimer un drapeau\n");
     printf("4.Sauvegarder la partie actuelle\n");
@@ -77,7 +77,7 @@ void choisirCase(int* coordonnees, int taille)
     printf("-->Entrez x : ");
     x = getInt();
     while(x<1 || x>taille){
-        printf("Veuillez entrer une coordonnÃ©e existante\n");
+        printf("Veuillez entrer une coordonnee existante\n");
         printf("-->Entrez x : ");
         x = getInt();
     }
@@ -85,7 +85,7 @@ void choisirCase(int* coordonnees, int taille)
     printf("-->Entrez y : ");
     y = getInt();
     while(y<1 || y>taille){
-        printf("Veuillez entrer une coordonnÃ©e existante\n");
+        printf("Veuillez entrer une coordonnee existante\n");
         printf("-->Entrez y : ");
         y = getInt();
     }

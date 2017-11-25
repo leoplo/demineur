@@ -79,7 +79,7 @@ char intToChar(int n)
 char afficherCase(ElementGrille e)
 {
     if(e.caseRevelee)
-        return (e.minesAdjacentes > 0)? intToChar(e.minesAdjacentes) : ' ';
+        return intToChar(e.minesAdjacentes);
 
     if(e.presenceDrapeau)
         return 'd';
