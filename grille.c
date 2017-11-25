@@ -30,6 +30,7 @@ ElementGrille** remplirGrille(int taille)
             e->caseRevelee = 0;
             e->presenceDrapeau =0;
             e->presenceMine = 0;
+            e->minesAdjacentes = 0;
             grille[i][j] = *e;
         }
     }
@@ -189,4 +190,33 @@ void minesAdjacentes(ElementGrille** grille, int x, int y, int taille){
         minesAdjacentes(grille, x+1, y, taille);
         minesAdjacentes(grille, x, y-1, taille);
     }
+}
+
+void sauvegardeGrille(char* nomFichier, ElementGrille** grille, int tailleGrille)
+{
+    FILE* fichier = NULL;
+    fichier = fopen(nomFichier, "w");
+    int i,j;
+    if(fichier == NULL)
+    {
+        printf("fichier inexistant");
+    }
+    else
+    {
+        for(i=0;i<tailleGrille;i++)
+        {
+            for(j=0;j<tailleGrille;j++)
+            {
+                ElementGrille* e = malloc(sizeof(ElementGrille));
+                e->caseRevelee = grille[i][j].caseRevelee;
+                e->minesAdjacentes = grille[i][j].minesAdjacentes;
+                e->presenceDrapeau = grille[i][j].presenceDrapeau;
+                e->presenceMine = grille[i][j].presenceMine;
+                fprintf(fichier," %d %d %d %d %d %d \n", i, j,  e->presenceMine, e->presenceDrapeau,  e->caseRevelee, e->minesAdjacentes);
+                free(e);
+            }
+
+        }
+    }
+    fclose(fichier);
 }

@@ -16,5 +16,6 @@ int revelerCase(ElementGrille** grille, int * coordonnes, int taille);
 int existe(int x, int y, int taille);
 void minesAdjacentes(ElementGrille** grille, int x, int y, int taille);
 
-#endif // GRILLE_H_INCLUDED
+void sauvegardeGrille(char* nomFichier, ElementGrille** grille, int tailleGrille);
 
+#endif // GRILLE_H_INCLUDED

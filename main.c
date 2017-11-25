@@ -11,7 +11,8 @@
 #define CHOISIR_CASE 1
 #define PLACER_DRAPEAU 2
 #define ENLEVER_DRAPEAU 3
-#define QUITTER 4
+#define SAUVEGARDER 4
+#define QUITTER 5
 
 int choixDuJoueur()
 {
@@ -43,6 +44,9 @@ int main()
             switch(choix){
                 case CHOISIR_CASE:
                     quitterJeu = revelerCase(grille, coordonnees, taille);
+                    if(quitterJeu)
+                        printf("Perdu\n");
+
                     break;
 
                 case PLACER_DRAPEAU:
@@ -52,12 +56,15 @@ int main()
                 case ENLEVER_DRAPEAU:
                     enleverDrapeau(grille, coordonnees);
                     break;
+
+                case SAUVEGARDER:
+                    sauvegardeGrille("save.txt", grille,taille);
+                    quitterJeu = 1;
+                    break;
             }
 
-            if(quitterJeu){
-                printf("Perdu\n");
+            if(quitterJeu)
                 break;
-            }
 
             afficherGrille(grille, taille);
             choix = choixDuJoueur();

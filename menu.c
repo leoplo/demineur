@@ -58,10 +58,11 @@ int menu()
 int affichageInteractionJoueur()
 {
     printf("--------Actions possibles---------\n\n");
-    printf("1.RÃ©vÃ©ler une case\n");
+    printf("1.Révéler une case\n");
     printf("2.Placer un drapeau\n");
     printf("3.Supprimer un drapeau\n");
-    printf("4.Quitter\n");
+    printf("4.Sauvegarder la partie actuelle\n");
+    printf("5.Quitter\n");
     printf("\nVotre choix?\n\n");
 
     return getInt();
@@ -92,4 +93,3 @@ void choisirCase(int* coordonnees, int taille)
     coordonnees[0] = x-1;
     coordonnees[1] = y-1;
 }
-
