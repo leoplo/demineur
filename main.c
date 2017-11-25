@@ -4,31 +4,52 @@
 #include "grille.h"
 #include "mines.h"
 
+#define JOUER 1
+#define REPRENDRE 2
+#define QUITTER_MENU 3
+
+#define CHOISIR_CASE 1
+#define PLACER_DRAPEAU 2
+#define ENLEVER_DRAPEAU 3
+#define QUITTER 4
+
+int choixDuJoueur()
+{
+    int choix = affichageInteractionJoueur();
+
+    while(choix < CHOISIR_CASE || choix > QUITTER){
+        printf("Veuillez choisir parmi les options possibles\n");
+        choix = affichageInteractionJoueur();
+    }
+
+    return choix;
+}
+
 int main()
 {
     int i, taille=9, nbMines=15, choix, coordonnees[2], quitterJeu=0;
 
     i=menu();
 
-    if(i==1)
+    if(i==JOUER)
     {
         ElementGrille** grille = nouvelleGrille(taille, nbMines);
         afficherGrille(grille, taille);
-        choix = affichageInteractionJoueur(); //afficher les intéractions possibles avec le joueur
+        choix = choixDuJoueur(); //afficher les intéractions possibles avec le joueur
 
-        while(choix!=4){
+        while(choix != QUITTER){
             choisirCase(coordonnees, taille);
 
             switch(choix){
-                case 1://Choisir une case
+                case CHOISIR_CASE:
                     quitterJeu = revelerCase(grille, coordonnees, taille);
                     break;
 
-                case 2://Placer drapeau
+                case PLACER_DRAPEAU:
                     placerDrapeau(grille, coordonnees);
                     break;
 
-                case 3://Enlever drapeau
+                case ENLEVER_DRAPEAU:
                     enleverDrapeau(grille, coordonnees);
                     break;
             }
@@ -39,7 +60,7 @@ int main()
             }
 
             afficherGrille(grille, taille);
-            choix = affichageInteractionJoueur();
+            choix = choixDuJoueur();
         }
 
         for(i=0;i<taille;i++)

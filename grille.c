@@ -70,10 +70,15 @@ void definirLigneSeparatrice(char* ligne, int taille)
     strcat(ligne, "+");
 }
 
+char intToChar(int n)
+{
+    return n+48;
+}
+
 char afficherCase(ElementGrille e)
 {
     if(e.caseRevelee)
-        return e.minesAdjacentes+48;
+        return (e.minesAdjacentes > 0)? intToChar(e.minesAdjacentes) : ' ';
 
     if(e.presenceDrapeau)
         return 'd';
@@ -127,7 +132,6 @@ int presenceMine(int x, int y, ElementGrille** grille, int taille)
     if(x<0 || y<0 || x>taille-1 || y>taille-1)
         return 0;
 
-    printf("presenceMine: %d\n", grille[x][y].presenceMine);
     return grille[x][y].presenceMine;
 }
 
@@ -178,16 +182,11 @@ void minesAdjacentes(ElementGrille** grille, int x, int y, int taille){
         + presenceMine(x+1, y-1, grille, taille)
         + presenceMine(x, y-1, grille, taille)
         + presenceMine(x-1, y-1, grille, taille);
-    printf("mines: %d\n", grille[x][y].minesAdjacentes);
 
     if(grille[x][y].minesAdjacentes == 0){
         minesAdjacentes(grille, x-1, y, taille);
-        minesAdjacentes(grille, x-1, y+1, taille);
         minesAdjacentes(grille, x, y+1, taille);
-        minesAdjacentes(grille, x+1, y+1, taille);
         minesAdjacentes(grille, x+1, y, taille);
-        minesAdjacentes(grille, x+1, y-1, taille);
         minesAdjacentes(grille, x, y-1, taille);
-        minesAdjacentes(grille, x-1, y-1, taille);
     }
 }

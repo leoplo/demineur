@@ -6,6 +6,7 @@ ElementGrille** nouvelleGrille(int taille, int nbMines);
 ElementGrille** remplirGrille(int taille);
 void remplirTab(char* tab, int taille, char c);
 void definirLigneSeparatrice(char* ligne, int taille);
+char intToChar(int n);
 char afficherCase(ElementGrille e);
 void afficherGrille(ElementGrille** grille, int taille);
 int presenceMine(int x, int y, ElementGrille** grille, int taille);

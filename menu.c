@@ -2,41 +2,51 @@
 #include <stdlib.h>
 #include "menu.h"
 
+#define JOUER 1
+#define REPRENDRE 2
+#define QUITTER_MENU 3
+
+int getInt()
+{
+    int i;
+    int res = scanf("%d", &i);
+
+    if (res == 0)
+        while (fgetc(stdin) != '\n');// lire jusqu'au '\n', utilisé si l'utilisateur rentre une chaîne de caractères
+
+    return i;
+}
 
 int affichageMenu()
 {
-     int choixMenu;
-
      printf("---Menu---\n\n");
-     printf("1.Jouer !\n");
-     printf("2.Reprendre!\n");
+     printf("1.Jouer\n");
+     printf("2.Reprendre\n");
      printf("3.Quitter\n");
      printf("\nVotre choix?\n\n");
 
-     scanf("%d", &choixMenu);
-     return choixMenu;
+     return getInt();
 }
-
 
 int menu()
 {
     int choix = affichageMenu();
-    while(choix < 1 || choix > 3){
+    while(choix < JOUER || choix > QUITTER_MENU){
         printf("Veuillez choisir parmi les options proposées\n");
         choix = affichageMenu();
     }
 
     switch(choix)
     {
-        case 1:
-            printf("Vous avez choisi de jouer!\n");
+        case JOUER:
+            printf("Vous avez choisi de jouer\n");
             break;
 
-        case 2:
-            printf("Vous avez choisi de reprendre!\n");
+        case REPRENDRE:
+            printf("Vous avez choisi de reprendre\n");
             break;
 
-        case 3:
+        case QUITTER_MENU:
             printf("Vous avez choisi de quitter\n");
             break;
     }
@@ -47,21 +57,14 @@ int menu()
 
 int affichageInteractionJoueur()
 {
-    int choix;
     printf("--------Actions possibles---------\n\n");
-    printf("1.Reveler une case\n");
+    printf("1.Révéler une case\n");
     printf("2.Placer un drapeau\n");
     printf("3.Supprimer un drapeau\n");
     printf("4.Quitter\n");
     printf("\nVotre choix?\n\n");
 
-    scanf("%d",&choix);
-    while(choix < 1 || choix > 4){
-        printf("Veuillez choisir parmi les options proposées\n");
-        scanf("%d",&choix);
-    }
-
-    return choix;
+    return getInt();
 }
 
 void choisirCase(int* coordonnees, int taille)
@@ -71,19 +74,19 @@ void choisirCase(int* coordonnees, int taille)
     printf("--------Choisir une case---------\n\n");
 
     printf("-->Entrez x : ");
-    scanf("%d", &x);
+    x = getInt();
     while(x<1 || x>taille){
-        printf("Veuillez entrer une coordonnee existante\n");
+        printf("Veuillez entrer une coordonnée existante\n");
         printf("-->Entrez x : ");
-        scanf("%d", &x);
+        x = getInt();
     }
 
     printf("-->Entrez y : ");
-    scanf("%d", &y);
+    y = getInt();
     while(y<1 || y>taille){
-        printf("Veuillez entrer une coordonnee existante\n");
+        printf("Veuillez entrer une coordonnée existante\n");
         printf("-->Entrez y : ");
-        scanf("%d", &y);
+        y = getInt();
     }
 
     coordonnees[0] = x-1;
