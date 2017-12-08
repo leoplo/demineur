@@ -71,6 +71,7 @@ void definirLigneSeparatrice(char* ligne, int taille)
     strcat(ligne, "+");
 }
 
+
 char intToChar(int n)
 {
     return n+48;
@@ -133,6 +134,7 @@ int presenceMine(int x, int y, ElementGrille** grille, int taille)
     if(x<0 || y<0 || x>taille-1 || y>taille-1)
         return 0;
 
+    printf("presenceMine: %d\n", grille[x][y].presenceMine);
     return grille[x][y].presenceMine;
 }
 
@@ -183,12 +185,17 @@ void minesAdjacentes(ElementGrille** grille, int x, int y, int taille){
         + presenceMine(x+1, y-1, grille, taille)
         + presenceMine(x, y-1, grille, taille)
         + presenceMine(x-1, y-1, grille, taille);
+    printf("mines: %d\n", grille[x][y].minesAdjacentes);
 
     if(grille[x][y].minesAdjacentes == 0){
         minesAdjacentes(grille, x-1, y, taille);
+        minesAdjacentes(grille, x-1, y+1, taille);
         minesAdjacentes(grille, x, y+1, taille);
+        minesAdjacentes(grille, x+1, y+1, taille);
         minesAdjacentes(grille, x+1, y, taille);
+        minesAdjacentes(grille, x+1, y-1, taille);
         minesAdjacentes(grille, x, y-1, taille);
+        minesAdjacentes(grille, x-1, y-1, taille);
     }
 }
 
@@ -219,4 +226,29 @@ void sauvegardeGrille(char* nomFichier, ElementGrille** grille, int tailleGrille
         }
     }
     fclose(fichier);
+}
+
+ElementGrille** chargerGrille(char* nomFichier, int tailleGrille)
+{
+    FILE* fichier = NULL;
+    ElementGrille** grille = remplirGrille(tailleGrille);
+    int presenceMine,presenceDrapeau,caseRevelee,minesAdjacentes;
+    fichier = fopen(nomFichier, "r+");
+    int i,j;
+    if(fichier == NULL)
+    {
+        printf("fichier inexistant");
+    }
+    else
+    {
+        while(fscanf(fichier," %d %d %d %d %d %d \n", &i, &j, &presenceMine,&presenceDrapeau,&caseRevelee,&minesAdjacentes)!=EOF)
+        {
+            grille[i][j].caseRevelee = caseRevelee;
+            grille[i][j].presenceMine = presenceMine;
+            grille[i][j].presenceDrapeau = presenceDrapeau;
+            grille[i][j].minesAdjacentes = minesAdjacentes;
+        }
+    }
+    fclose(fichier);
+    return grille;
 }

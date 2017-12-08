@@ -17,5 +17,6 @@ int existe(int x, int y, int taille);
 void minesAdjacentes(ElementGrille** grille, int x, int y, int taille);
 
 void sauvegardeGrille(char* nomFichier, ElementGrille** grille, int tailleGrille);
+ElementGrille** chargerGrille(char* nomFichier, int tailleGrille);
 
 #endif // GRILLE_H_INCLUDED
