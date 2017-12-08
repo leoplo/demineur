@@ -59,6 +59,8 @@ int main()
 
                 case SAUVEGARDER:
                     sauvegardeGrille("save.txt", grille,taille);
+                    ElementGrille** grille2 = chargerGrille("save.txt",taille);
+                    afficherGrille(grille2,taille);
                     quitterJeu = 1;
                     break;
             }
