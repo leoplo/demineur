@@ -138,14 +138,25 @@ int presenceMine(int x, int y, ElementGrille** grille, int taille)
     return grille[x][y].presenceMine;
 }
 
-void placerDrapeau(ElementGrille** grille, int* coordonnes)
+void placerDrapeau(ElementGrille** grille, int* coordonnes, int taille, int* nbMineRestante)
 {
     grille[coordonnes[0]][coordonnes[1]].presenceDrapeau = 1;
+    if (presenceMine(coordonnes[0],coordonnes[1],grille, taille))
+    {
+        *nbMineRestante -= 1;
+    }
 }
 
-void enleverDrapeau(ElementGrille** grille, int* coordonnes)
+void enleverDrapeau(ElementGrille** grille, int* coordonnes, int taille, int* nbMineRestante)
 {
-    grille[coordonnes[0]][coordonnes[1]].presenceDrapeau = 0;
+    if(grille[coordonnes[0]][coordonnes[1]].presenceDrapeau)//S'il y a un drapeau
+    {
+        grille[coordonnes[0]][coordonnes[1]].presenceDrapeau = 0;
+        if (presenceMine(coordonnes[0],coordonnes[1],grille, taille)) //S'il y a une mine
+        {
+            *nbMineRestante += 1;
+        }
+    }
 }
 
 //retourne 1 si la partie est perdue, 0 sinon
