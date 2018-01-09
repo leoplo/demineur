@@ -26,28 +26,33 @@ int choixDuJoueur()
     return choix;
 }
 
-int JeuGagne(int nbMines)
+int JeuGagne(ElementGrille** grille, int taille, int minesRestantes)
 {
-    if(nbMines == 0)
-    {
-        return 1;
-    }
-    else
-    {
+    int i, j;
+    if(minesRestantes != 0)
         return 0;
+
+    for(i=0;i<taille;i++){
+        for(j=0;j<taille;j++){
+            if(!grille[i][j].presenceDrapeau && !grille[i][j].caseRevelee)
+                return 0;
+        }
     }
+
+    return 1;
 }
 
 int main()
 {
-    int i, taille=9, nbMines=2, choix, coordonnees[2], quitterJeu=0;
+    int i, taille=9, nbMines=2, choix, coordonnees[2], quitterJeu=0, minesRestantes;
 
+    minesRestantes = nbMines;
     i=menu();
 
     if(i==JOUER)
     {
         ElementGrille** grille = nouvelleGrille(taille, nbMines);
-        afficherGrille(grille, taille);
+        afficherGrille(grille, taille, minesRestantes);
         choix = choixDuJoueur(); //afficher les intéractions possibles avec le joueur
         while(choix != QUITTER){
             if(choix!=SAUVEGARDER) choisirCase(coordonnees, taille); //Ne pas choisir de case lorsque l'utilisateur choisit de sauvegarder
@@ -56,33 +61,41 @@ int main()
                     quitterJeu = revelerCase(grille, coordonnees, taille);
                     if(quitterJeu)
                         printf("Perdu\n");
-                    break;
-
-                case PLACER_DRAPEAU:
-                    placerDrapeau(grille, coordonnees, taille, &nbMines);
-                    if(JeuGagne(nbMines))
+                    if(JeuGagne(grille,taille,minesRestantes))
                     {
                         printf("Gagne !\n");
                         quitterJeu = 1;
-                        break;
+                    }
+                    break;
+
+                case PLACER_DRAPEAU:
+                    if(placerDrapeau(grille, coordonnees, taille))
+                        minesRestantes--;
+
+                    if(JeuGagne(grille,taille,minesRestantes))
+                    {
+                        printf("Gagne !\n");
+                        quitterJeu = 1;
                     }
                     break;
 
                 case ENLEVER_DRAPEAU:
-                    enleverDrapeau(grille, coordonnees, taille, &nbMines);
+
+                    if(enleverDrapeau(grille, coordonnees, taille))
+                        minesRestantes++;
                     break;
 
                 case SAUVEGARDER:
                     sauvegardeGrille("save.txt", grille,taille);
                     ElementGrille** grille = chargerGrille("save.txt",taille);
-                    afficherGrille(grille,taille);
+                    afficherGrille(grille,taille,minesRestantes);
                     quitterJeu = 1;
                     break;
             }
             if(quitterJeu)
                 break;
 
-            afficherGrille(grille, taille);
+            afficherGrille(grille, taille,minesRestantes);
             choix = choixDuJoueur();
         }
 
@@ -97,42 +110,51 @@ int main()
     if (i == REPRENDRE)
     {
         ElementGrille** grille = chargerGrille("save.txt",taille);
-        afficherGrille(grille,taille);
+        afficherGrille(grille,taille, minesRestantes);
                 choix = choixDuJoueur(); //afficher les intéractions possibles avec le joueur
         while(choix != QUITTER){
             if(choix!=SAUVEGARDER) choisirCase(coordonnees, taille); //Ne pas choisir de case lorsque l'utilisateur choisit de sauvegarder
             switch(choix){
                 case CHOISIR_CASE:
                     quitterJeu = revelerCase(grille, coordonnees, taille);
+
                     if(quitterJeu)
                         printf("Perdu\n");
-                    break;
 
-                case PLACER_DRAPEAU:
-                    placerDrapeau(grille, coordonnees, taille, &nbMines);
-                    if(JeuGagne(nbMines))
+                    if(JeuGagne(grille,taille,minesRestantes))
                     {
                         printf("Gagne !\n");
                         quitterJeu = 1;
-                        break;
+                    }
+                    break;
+
+                case PLACER_DRAPEAU:
+                    if(placerDrapeau(grille, coordonnees, taille))
+                        minesRestantes--;
+
+                    if(JeuGagne(grille,taille,minesRestantes))
+                    {
+                        printf("Gagne !\n");
+                        quitterJeu = 1;
                     }
                     break;
 
                 case ENLEVER_DRAPEAU:
-                    enleverDrapeau(grille, coordonnees, taille, &nbMines);
+                    if(enleverDrapeau(grille, coordonnees, taille))
+                        minesRestantes++;
                     break;
 
                 case SAUVEGARDER:
                     sauvegardeGrille("save.txt", grille,taille);
                     ElementGrille** grille = chargerGrille("save.txt",taille);
-                    afficherGrille(grille,taille);
+                    afficherGrille(grille,taille,minesRestantes);
                     quitterJeu = 1;
                     break;
             }
             if(quitterJeu)
                 break;
 
-            afficherGrille(grille, taille);
+            afficherGrille(grille, taille, minesRestantes);
             choix = choixDuJoueur();
         }
 

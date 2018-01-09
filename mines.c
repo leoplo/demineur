@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 #include "mines.h"
 
 int coordonneesExisteDeja(int x, int y, ElementGrille** grille) //renvoie 1 si le couple x,y existe déjà dans la grille
@@ -16,6 +17,7 @@ int coordonneesExisteDeja(int x, int y, ElementGrille** grille) //renvoie 1 si l
 void genererMines(ElementGrille** grille, int taille, int nbMines)
 {
     int i = nbMines, nbAleaX, nbAleaY;
+    srand(time(NULL));
 
     while(i>0)
     {

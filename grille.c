@@ -92,10 +92,12 @@ char afficherCase(ElementGrille e)
 }
 
 //imprime sur la sortie standard l'état actuel de la partie
-void afficherGrille(ElementGrille** grille, int taille)
+void afficherGrille(ElementGrille** grille, int taille, int minesRestantes)
 {
     int i, j;
     char *ligne, *ligneSeparatrice, marge[MARGE+1];
+
+    printf("\n mines restantes: %d \n", minesRestantes);
 
     remplirTab(marge, MARGE, ' ');
     ligne = malloc((MARGE + (TAILLE_CASE+1)*(taille+1)) * sizeof(char));
@@ -134,29 +136,28 @@ int presenceMine(int x, int y, ElementGrille** grille, int taille)
     if(x<0 || y<0 || x>taille-1 || y>taille-1)
         return 0;
 
-    printf("presenceMine: %d\n", grille[x][y].presenceMine);
     return grille[x][y].presenceMine;
 }
 
-void placerDrapeau(ElementGrille** grille, int* coordonnes, int taille, int* nbMineRestante)
+int placerDrapeau(ElementGrille** grille, int* coordonnes, int taille)
 {
-    grille[coordonnes[0]][coordonnes[1]].presenceDrapeau = 1;
-    if (presenceMine(coordonnes[0],coordonnes[1],grille, taille))
+    if(!grille[coordonnes[0]][coordonnes[1]].caseRevelee && !grille[coordonnes[0]][coordonnes[1]].presenceDrapeau)//S'il n'y a pas de drapeau et que la case n'a pas déjà été révélée
     {
-        *nbMineRestante -= 1;
+        grille[coordonnes[0]][coordonnes[1]].presenceDrapeau = 1;
+        return 1;
     }
+    return 0;
+
 }
 
-void enleverDrapeau(ElementGrille** grille, int* coordonnes, int taille, int* nbMineRestante)
+int enleverDrapeau(ElementGrille** grille, int* coordonnes, int taille)
 {
     if(grille[coordonnes[0]][coordonnes[1]].presenceDrapeau)//S'il y a un drapeau
     {
         grille[coordonnes[0]][coordonnes[1]].presenceDrapeau = 0;
-        if (presenceMine(coordonnes[0],coordonnes[1],grille, taille)) //S'il y a une mine
-        {
-            *nbMineRestante += 1;
-        }
+        return 1;
     }
+    return 0;
 }
 
 //retourne 1 si la partie est perdue, 0 sinon
@@ -186,7 +187,10 @@ void minesAdjacentes(ElementGrille** grille, int x, int y, int taille){
     if(!existe(x, y, taille) || grille[x][y].caseRevelee)
         return;
 
-    grille[x][y].caseRevelee = 1;
+    if(!grille[x][y].presenceDrapeau)
+        grille[x][y].caseRevelee = 1;
+
+
     grille[x][y].minesAdjacentes =
         presenceMine(x-1, y, grille, taille)
         + presenceMine(x-1, y+1, grille, taille)
@@ -196,17 +200,12 @@ void minesAdjacentes(ElementGrille** grille, int x, int y, int taille){
         + presenceMine(x+1, y-1, grille, taille)
         + presenceMine(x, y-1, grille, taille)
         + presenceMine(x-1, y-1, grille, taille);
-    printf("mines: %d\n", grille[x][y].minesAdjacentes);
 
     if(grille[x][y].minesAdjacentes == 0){
         minesAdjacentes(grille, x-1, y, taille);
-        minesAdjacentes(grille, x-1, y+1, taille);
         minesAdjacentes(grille, x, y+1, taille);
-        minesAdjacentes(grille, x+1, y+1, taille);
         minesAdjacentes(grille, x+1, y, taille);
-        minesAdjacentes(grille, x+1, y-1, taille);
         minesAdjacentes(grille, x, y-1, taille);
-        minesAdjacentes(grille, x-1, y-1, taille);
     }
 }
 
